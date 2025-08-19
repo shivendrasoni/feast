@@ -16,7 +16,7 @@ const PROVIDER_CONFIGS = {
     }
   },
   deepseek: {
-    baseURL: 'https://openrouter.ai/api/v1"',
+    baseURL: 'https://openrouter.ai/api/v1',
     defaultModel: 'deepseek/deepseek-r1-0528-qwen3-8b:free',
     headers: {}
   },

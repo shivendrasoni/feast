@@ -41,7 +41,7 @@ const initialProviders: Record<string, AIProvider> = {
     name: 'DeepSeek',
     color: 'text-blue-400',
     enabled: true,
-    model: 'deepseek-chat',
+    model: 'deepseek/deepseek-r1-0528-qwen3-8b:free',
     maxTokens: 2000,
   },
   perplexity: {
@@ -160,7 +160,22 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       if (encrypted) {
         const decrypted = decryptData(encrypted);
         const settings = JSON.parse(decrypted) as AppSettings;
-        dispatch({ type: 'SET_SETTINGS', payload: settings });
+        
+        // Migration: Update old model names to new ones
+        const migratedSettings = {
+          ...settings,
+          providers: {
+            ...settings.providers,
+            deepseek: {
+              ...settings.providers.deepseek,
+              model: settings.providers.deepseek?.model === 'deepseek-chat' 
+                ? 'deepseek/deepseek-r1-0528-qwen3-8b:free' 
+                : settings.providers.deepseek?.model || 'deepseek/deepseek-r1-0528-qwen3-8b:free'
+            }
+          }
+        };
+        
+        dispatch({ type: 'SET_SETTINGS', payload: migratedSettings });
       }
     } catch (error) {
       console.error('Failed to load settings:', error);
