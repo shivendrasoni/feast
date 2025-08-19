@@ -1,4 +1,5 @@
 # AIFeast 🤖
+![](./screenshot.png)
 
 **AIFeast** is a stupid AF AI comparison tool that allows you to query multiple AI providers simultaneously and compare their responses side-by-side. Get the best insights by leveraging different AI models and their unique strengths in a single, elegant interface.
 
